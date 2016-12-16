@@ -1,0 +1,16 @@
+<style>
+#parser2 table{margin:0 auto;width:100%}
+#parser2 textarea#somewhere{background:#f8f8f8;border:1px solid #ccc;height:100px;width:100%;padding:5px;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
+#parser2 textarea#somewhere:active,#parser2 textarea#somewhere:focus{border:2px solid #e8554e;outline:0}
+input.button-parse{padding:5px;margin-top:10px}
+::selection{background:#e8554e;color:#fff}
+</style>
+<div id="parser2">
+<table><tbody>
+<tr> <td><textarea id="somewhere" style="height: 300px!important;"></textarea><br/>
+<input onclick="convert();" class='button-parse' type="button" value="Parse Script"/></td> </tr>
+</tbody></table>
+</div>
+<script type="text/javascript">
+function convert(){var ele1 = document.getElementById("somewhere");var replaced;replaced = ele1.value;replaced = replaced.replace(/&/ig, "&amp;");replaced = replaced.replace(/</ig, "&lt;");replaced = replaced.replace(/>/ig, "&gt;");replaced = replaced.replace(/"/ig, "&quot;");replaced = replaced.replace(/&#177;/ig, "&plusmn;");replaced = replaced.replace(/&#169;/ig, "&copy;");replaced = replaced.replace(/&#174;/ig, "&reg;");replaced = replaced.replace(/ya'll/ig, "ya'll");ele1.value = replaced;ele1.select();}
+</script>
