@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
@@ -13,7 +14,7 @@
 	top: 50%;
 }
 </style>
-<!--/**viewport**/-->
+<!--/**viewportはテスト用。あとで消す**/-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 </head>
@@ -28,7 +29,7 @@ $(function() {
 		var widget_id = undefined;
 		var widget_parameter = '';
 		
-		widget_parameter = '{"type":"","sources":[{"source":"http://false/feeds/posts/default","type":"RSS"}],"name":"","width":0,"height":"470","height_by_article":0,"target":"_blank","font":"Arial, Helvetica, sans-serif","title_font_size":"16","item_title_font_size":"16","item_description_font_size":"12","border":"off","css_url":"","responsive":"on","text_direction":"left","text_alignment":"left","corner":"square","scroll":"on","auto_scroll":"on","auto_scroll_direction":"up","auto_scroll_step_speed":"4","auto_scroll_mc_speed":"20","sort":"rnd","title":"off","title_sentence":"","title_link":"","title_bgcolor":"#ffffff","title_color":"#505659","title_bgimage":"","item_bgcolor":"#ffffff","item_bgimage":"","item_title_length":"200","item_title_color":"#false","item_border_bottom":"on","item_description":"both","item_link":"off","item_description_length":"150","item_description_color":"#505659","item_date":"on","item_date_format":"%b %e, %Y %k:%M","item_date_timezone":"","item_description_style":"thumbnail","item_thumbnail":"crop","item_thumbnail_selection":"auto","article_num":"9999","item_player":"youtube","keyword_inc":"","keyword_exc":""}';
+		widget_parameter = '{"type":"","sources":[{"source":"http://www.kompiajaib.com/feeds/posts/default/-/CSS3","type":"RSS"}],"name":"","width":0,"height":"470","height_by_article":0,"target":"_blank","font":"Arial, Helvetica, sans-serif","title_font_size":"16","item_title_font_size":"16","item_description_font_size":"14","border":"off","css_url":"https://cdn.rawgit.com/KompiAjaib/kompi-html/master/freewind6.css","responsive":"on","text_direction":"left","text_alignment":"left","corner":"square","scroll":"on","auto_scroll":"on","auto_scroll_direction":"up","auto_scroll_step_speed":"4","auto_scroll_mc_speed":"20","sort":"rnd","title":"off","title_sentence":"","title_link":"","title_bgcolor":"#ffffff","title_color":"#505659","title_bgimage":"","item_bgcolor":"#ffffff","item_bgimage":"","item_title_length":"200","item_title_color":"#222222","item_border_bottom":"on","item_description":"both","item_link":"off","item_description_length":"150","item_description_color":"#505659","item_date":"off","item_date_format":"%b %e, %Y %k:%M","item_date_timezone":"","item_description_style":"thumbnail","item_thumbnail":"crop","item_thumbnail_selection":"auto","article_num":"9999","item_player":"youtube","keyword_inc":"","keyword_exc":""}';
 		$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
 			options.async = true;
 		});
