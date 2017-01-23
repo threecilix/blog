@@ -19,7 +19,7 @@ a{text-decoration:none;color:#e8554e;font-weight:700}
 #codes:active,#codes:focus{background-color:#fff;color:#000;border:1px solid #ccc;outline:0}
 .button-group{float:left;text-align:left;margin:-3px auto 0}
 button{cursor:pointer}
-.button-group span{font-family:Roboto,Arial,sans-serif;font-size:12px;vertical-align:2px;line-height:1;vertical-align:-1px;color:#555;}
+.button-group span{font-family:Roboto,Arial,sans-serif;font-size:12px;vertical-align:2px;line-height:1;vertical-align:-1px;color:#555;display:inline;}
 #opt1,#opt2,#opt3,#opt4,#opt5{display:inline-block;vertical-align:middle;border:none;outline:0;margin:0 10px 0 0}
 #opt6,#opt7,#opt8,#opt9,#opt10,#opt11,#opt12,#opt13,#opt14,#opt15,#opt16,#opt17,#opt18,#opt19,#opt20{display:inline-block;vertical-align:middle;border:none;outline:0;margin:0}
 .checkbox span{font:14px Roboto,Arial,sans-serif;vertical-align:middle;line-height:1;color:#555;margin-right:10px}
@@ -39,12 +39,55 @@ button{cursor:pointer}
 .btn-info:active,.btn-info:hover{color:#fff;background-color:#31b0d5;border-color:#269abc}
 .btn-xs{font-size:12px;line-height:1.5;border-radius:3px;padding:1px 5px}
 .clear{clear:both;display:block}
+.collapse{display:none}
+#parser{position:relative}
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+.alert {
+    padding: 15px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    position:absolute;
+    top: 10px;
+    right:10px;
+    min-width:230px;
+}
+button.close {
+    padding: 0;
+    cursor: pointer;
+    background: 0 0;
+    border: 0;
+    -webkit-appearance: none;
+    line-height: 1;
+}
+.close {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .2;
+}
+button.close:focus {
+    outline:none;
+}
+.close:hover{opacity:1!important}
+#btnInfo h4{margin:0}
+#button-link{display:none}
 </style>
 </head>
 <body>
 
 <div id='parser'>
 <textarea id='codes' placeholder='Tulis/paste kode atau teks di sini lalu klik tombol yang sesuai. Untuk embed komentar, ambil ID DISQUS dari URL tombol share komentar Disqus.' spellcheck='false'></textarea>
+<div class='alert alert-success margin-bottom-20 collapse' id='btnInfo' role='alert'>
+        <button class='close close-copy' onclick='document.getElementById(&quot;btnInfo&quot;).style.display = &quot;none&quot;;cdClear();' type='button'><span aria-hidden='true'>&#215;</span></button>
+        <h4>Codes copied to clipboard!</h4>
+      </div>
 <span class='button-group'>
 <button class='btn btn-primary btn-xs' id='cvrt3' onclick='strongConvert();this.disabled = true;'>strong</button>
 <button class='btn btn-primary btn-xs' id='cvrt4' onclick='emConvert();this.disabled = true;'>em</button>
@@ -54,8 +97,8 @@ button{cursor:pointer}
 <button class='btn btn-primary btn-xs' id='cvrt8' onclick='codeConvert();this.disabled = true;'>code</button>
 <button class='btn btn-primary btn-xs' id='cvrt9' onclick='precodeConvert();this.disabled = true;'>pre code</button>
 <button class='btn btn-primary btn-xs' id='cvrt10' onclick='spoilerConvert();this.disabled = true;'>spoiler</button><br/>
-<button class='btn btn-primary btn-xs' id='cvrt11' onclick='embedConvert();this.disabled = true;'>embed</button> <br/>
-<button class='btn btn-danger btn-xs' onclick='cdClear();'>Bersihkan</button>
+<button class='btn btn-primary btn-xs' id='cvrt11' onclick='embedConvert();this.disabled = true;'>embed</button> <span>How to get ID DISQUS - <a href='https://3.bp.blogspot.com/-5wJN6R18cZs/V8LMLmATPCI/AAAAAAAAnrk/j6xr9K2DPDMX7RNpb5qXttuHUwKQ7QK-wCLcB/s1600/Animation2.gif' rel='nofollow' target='_blank' title='Lihat di sini'>http://disq.us/p/[ID DISQUS]</a></span><br/>
+<button class='btn button-link btn-xs btn-info' id='button-link' data-clipboard-action='copy' data-clipboard-target='#codes' type='submit'>Copy codes to clipboard!</button> <button class='btn btn-danger btn-xs' onclick='cdClear();'>Bersihkan</button>
 </span>
 <span class='checkbox'>
   <input checked='' id='opt1' type='checkbox'/>
@@ -83,17 +126,9 @@ function cdClear() {
   var clears = document.querySelectorAll('#cvrt3, #cvrt4, #cvrt5, #cvrt6, #cvrt7, #cvrt8, #cvrt9, #cvrt10, #cvrt11')
   for (var i = 0; i < clears.length; i++)
 {
-  clears[i].disabled = false
-}
-}
-function cdClear2() {
-  var wtarea = document.getElementById('codes2');
-  wtarea.value = '';
-  wtarea.focus();
-  var clears = document.querySelectorAll('#cvrt, #cvrt2')
-  for (var i = 0; i < clears.length; i++)
-{
-  clears[i].disabled = false
+  clears[i].disabled = false,document.getElementById("btnInfo")
+        .style.display = "none",document.getElementById("button-link")
+        .style.display = "none"
 }
 }
 
@@ -116,7 +151,8 @@ var ctarea = document.getElementById('codes'),
       cv = cv.replace(/$/, "</pre>");
   ctarea.value = cv;
   ctarea.focus();
-  ctarea.select();}
+  document.getElementById("button-link")
+        .style.display = "inline-block"}
 };
 function codeConvert() {
 var ctarea = document.getElementById('codes'),
@@ -137,7 +173,8 @@ var ctarea = document.getElementById('codes'),
       cv = cv.replace(/$/, "</code>");
   ctarea.value = cv;
   ctarea.focus();
-  ctarea.select();}
+  document.getElementById("button-link")
+        .style.display = "inline-block"}
 };
 function precodeConvert() {
 var ctarea = document.getElementById('codes'),
@@ -158,7 +195,8 @@ var ctarea = document.getElementById('codes'),
       cv = cv.replace(/$/, "</code></pre>");
   ctarea.value = cv;
   ctarea.focus();
-  ctarea.select();}
+  document.getElementById("button-link")
+        .style.display = "inline-block"}
 };
 function spoilerConvert() {
 var ctarea = document.getElementById('codes'),
@@ -169,7 +207,8 @@ var ctarea = document.getElementById('codes'),
       cv = cv.replace(/$/, "</spoiler>");
   ctarea.value = cv;
   ctarea.focus();
-  ctarea.select();}
+  document.getElementById("button-link")
+        .style.display = "inline-block"}
 };
 function strongConvert() {
 var ctarea = document.getElementById('codes'),
@@ -180,7 +219,8 @@ var ctarea = document.getElementById('codes'),
       cv = cv.replace(/$/, "</strong>");
   ctarea.value = cv;
   ctarea.focus();
-  ctarea.select();}
+  document.getElementById("button-link")
+        .style.display = "inline-block"}
 };
 function emConvert() {
 var ctarea = document.getElementById('codes'),
@@ -191,7 +231,8 @@ var ctarea = document.getElementById('codes'),
       cv = cv.replace(/$/, "</em>");
   ctarea.value = cv;
   ctarea.focus();
-  ctarea.select();}
+  document.getElementById("button-link")
+        .style.display = "inline-block"}
 };
 
 function uConvert() {
@@ -203,7 +244,8 @@ var ctarea = document.getElementById('codes'),
       cv = cv.replace(/$/, "</u>");
   ctarea.value = cv;
   ctarea.focus();
-  ctarea.select();}
+  document.getElementById("button-link")
+        .style.display = "inline-block"}
 };
 function strikeConvert() {
 var ctarea = document.getElementById('codes'),
@@ -214,7 +256,8 @@ var ctarea = document.getElementById('codes'),
       cv = cv.replace(/$/, "</strike>");
   ctarea.value = cv;
   ctarea.focus();
-  ctarea.select();}
+  document.getElementById("button-link")
+        .style.display = "inline-block"}
 };
 function embedConvert() {
 var ctarea = document.getElementById('codes'),
@@ -225,45 +268,22 @@ var ctarea = document.getElementById('codes'),
       cv = cv.replace(/$/, "\" style=\"border:0;width:100%;height:300px;\" seamless=\"seamless\" scrolling=\"no\" allowtransparency=\"true\"><\/iframe>");
   ctarea.value = cv;
   ctarea.focus();
-  ctarea.select();}
-};
-
-function cdConvert() {
-  var ctarea = document.getElementById('codes2'),
-    cv = ctarea.value,
-    opt14 = document.getElementById('opt14'),
-    opt15 = document.getElementById('opt15'),
-    opt16 = document.getElementById('opt16'),
-    opt17 = document.getElementById('opt17'),
-    opt18 = document.getElementById('opt18')
-  cv = cv.replace(/\t/g, "    ");
-  if (opt14.checked) cv = cv.replace(/&/g, "&amp;");
-  if (opt15.checked) cv = cv.replace(/'/g, "&#039;");
-  if (opt16.checked) cv = cv.replace(/"/g, "&quot;");
-  if (opt17.checked) cv = cv.replace(/</g, "&lt;");
-  if (opt18.checked) cv = cv.replace(/>/g, "&gt;");
-  if (cv.lastIndexOf('\n') != -1 || cv.length > 40) {
-    cv = cv.replace(/^/, "<i rel=\"pre\">");
-  } else {
-    cv = cv.replace(/^/, "<i rel=\"code\">");
-  };
-  cv = cv.replace(/$/, "</i>");
-  ctarea.value = cv;
-  ctarea.focus();
-  ctarea.select();
-};
-function imgConvert() {
-var ctarea = document.getElementById('codes2'),
-    cv = ctarea.value,
-    opt19 = document.getElementById('opt19')
-  cv = cv.replace(/\t/g, "    ");
-    if (opt19.checked){ cv = cv.replace(/^/, "<i rel=\"image\">");
-      cv = cv.replace(/$/, "</i>");
-  ctarea.value = cv;
-  ctarea.focus();
-  ctarea.select();}
+  document.getElementById("button-link")
+        .style.display = "inline-block"}
 };
 </script>
-
+<script src='https://cdn.rawgit.com/zenorocha/clipboard.js/v1.5.16/dist/clipboard.min.js'></script>
+<script>
+//<![CDATA[
+var clipboard = new Clipboard(".button-link");
+clipboard.on("success", function (o) {
+    console.log(o), document.getElementById("btnInfo")
+        .style.display = "block", document.getElementById("codes")
+        .value = ""
+}), clipboard.on("error", function (o) {
+    console.log(o)
+});
+//]]>
+</script>
 </body>
 </html>
