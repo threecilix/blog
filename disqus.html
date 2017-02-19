@@ -1,7 +1,8 @@
-<div id="disqus_thread"></div>
 
+<div id="comments"></div>
 <script>
   window.addEventListener('message', receiveMessage, false);
+
   function receiveMessage(event) {
     if (event.data) {
       var msg;
@@ -19,6 +20,7 @@
       }
     }
   }
+
   function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
     var vars = query.split('&');
@@ -30,7 +32,8 @@
     }
     return (false);
   }
-  var css = '#disqus_thread {font-family:' + getQueryVariable('fontBodyFamily') + '} a {color:#' + getQueryVariable('fontLinkColor') + '}',
+  
+    var css = '#disqus_thread {font-family:' + getQueryVariable('fontBodyFamily') + '} a {color:#' + getQueryVariable('fontLinkColor') + '}',
     head = document.head || document.getElementsByTagName('head')[0],
     style = document.createElement('style');
 style.type = 'text/css';
@@ -40,15 +43,30 @@ if (style.styleSheet){
   style.appendChild(document.createTextNode(css));
 }
 head.appendChild(style);
-  var disqus_config = function() {
-    this.page.url = getQueryVariable('url');
-    this.page.identifier = getQueryVariable('identifier');
-  };
-  (function() {
-    var d = document,
-        s = d.createElement('script');
-    s.src = '//' + getQueryVariable('shortname') + '.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
+
+                var disqus_shortname = getQueryVariable('shortname');
+                var disqus_blogger_current_url = getQueryVariable('canonicalurl');
+
+                if (!disqus_blogger_current_url.length) {
+                    disqus_blogger_current_url = getQueryVariable('url');
+                }
+
+                var disqus_blogger_homepage_url = getQueryVariable('homepageurl');
+                var disqus_blogger_canonical_homepage_url = getQueryVariable('canonicalhomepageurl');
+ 
+                    (function() {
+                        var bloggerjs = document.createElement('script');
+                        bloggerjs.type = 'text/javascript';
+                        bloggerjs.async = true;
+                        bloggerjs.src = '//'+disqus_shortname+'.disqus.com/blogger_item.js';
+                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(bloggerjs);
+                    })();
+
+                (function() {
+                    var bloggerjs = document.createElement('script');
+                    bloggerjs.type = 'text/javascript';
+                    bloggerjs.async = true;
+                    bloggerjs.src = '//'+disqus_shortname+'.disqus.com/blogger_index.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(bloggerjs);
+                })();
 </script>
