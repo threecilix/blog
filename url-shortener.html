@@ -164,7 +164,7 @@ function makeShort() {
     request.execute(function(response) {
         if (response.id != null) {
             str = "";
-            str += "<button class='btn' data-clipboard-snippet><img class='clippy' width='13' src='https://firebasestorage.googleapis.com/v0/b/threecilix.appspot.com/o/image%2Fclippy.svg?alt=media&token=ded490f4-41c8-4fb6-a52a-0f078167d21b' alt='Copy to clipboard'></button><div id='foo'>"+ response.id +"</div>";
+            str += "<div class='output' contenteditable='true' onClick='document.execCommand(&quot;selectAll&quot;,false,null)' title='Click and CTRL+C'>" + response.id + "</div>";
             document.getElementById("output").innerHTML = str;
         } else {
             alert("ERROR: creating short url \n" + response.error);
